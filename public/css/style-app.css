@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    width: 100%;
+    padding: 1em;
+}
+
+.header__right-links {
+    float:right;
+}
+
+/*
+.sheet-container {
+
+}*/
+
+.highlighted-cell {
+    /*background: yellow !important;*/
+    outline: 3px solid rgba(0,0,0,0.5);
+}
+
+.selection {
+    background: rgba(255,255,0,0.2);
+}
+
+table {
+    border-collapse: collapse;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    cursor:default;
+}
+
+input {
+    width:100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+thead {
+    background: lightgray;
+}
+
+td {
+    width: 7em;
+}
+
+.right-grabber, .left-grabber {
+    display: inline-block;
+    height: 100%;
+    width: 1em;
+    background: red;
+}
+
+.right-grabber {
+    float: right;
+}
+
+.left-grabber {
+    float: left;
+}

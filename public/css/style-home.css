@@ -1,0 +1,8 @@
+body {
+    padding-top: 50px;
+}
+
+.form-signin, .form-register {
+    max-width: 330px;
+    margin: 0 auto;
+}
