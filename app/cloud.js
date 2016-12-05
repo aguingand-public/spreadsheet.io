@@ -2,6 +2,9 @@ var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
 
+var update = require('./update');
+var UpdateType = update.UpdateType;
+
 var cloud;
 
 cloud.prototype.getPath = function(fileId) {
@@ -10,31 +13,22 @@ cloud.prototype.getPath = function(fileId) {
 
 cloud.prototype.save = function(fileId, updateStack) {
     var filedata;
-    var sheet;
     var filepath = this.getPath(fileId);
     fs.readFile(filepath,function(err, data) {
         filedata=JSON.parse(data);
-        sheet=JSON.parse(data).sheet;
         for(var i=0;i<updateStack.length;i++) {
             var upd=updateStack[i];
-            switch(updateStack[i].type) {
+            switch(upd.type) {
                 case UpdateType.CELL_CHANGE:
+                    update.processCellChange(filedata);
+                break;
+                case UpdateType.ADD_ROW:
+                case UpdateType.ADD_COL:
+                case UpdateType.REMOVE_ROW:
+                case UpdateType.REMOVE_COL:
+                break;
             }
-            /// Grow array if high pos
-            if(upd.cell.x>sheet.length) {
-                var int=upd.cell.x-(sheet.length-1);
-                for(var j=0;j<int;j++)
-                    sheet.push([]);
-            }
-            if(upd.cell.y>sheet[upd.cell.x].length)
-            {
-                var int=upd.cell.x-(sheet.length[upd.cell.x]-1);
-                for(var j=0;j<int;j++)
-                    sheet[upd.cell.x].push([]);
-            }
-            sheet[upd.cell.x][upd.cell.y] = upd.cell;
         }
-        filedata.sheet = sheet;
         fs.writeFile(filepath, JSON.stringify(filedata), function(err) {
             if(err)
                 console.log(err)
