@@ -1,6 +1,10 @@
 var router=require('express').Router();
 var util=require('../app/util');
 
+router.get('/edit', function(req, res) {
+    res.render('editor', {title:'Editeur'});
+});
+
 router.get('/edit*',util.isLoggedIn, function(req, res, next) {
     res.locals.socketUrl = req.get('host');
     next();

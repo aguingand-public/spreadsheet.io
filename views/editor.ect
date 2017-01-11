@@ -1,40 +1,19 @@
 <% extend 'layout/default' %>
 
 <% content 'imports' %>
-    <script src="/assets/js/angular.min.js"></script>
+    <link rel="stylesheet" href="/bower_components/handsontable/dist/handsontable.min.css">
+    <script src="/bower_components/handsontable/dist/handsontable.full.min.js"></script>
+    
     <script src="/assets/js/socket.io-1.4.5.js"></script>
-
+    <script src="/assets/js/jquery-3.1.1.min.js"></script>
+    
     <script>
-        var filepath='<%= @file.path %>';
+        var filepath='<%= @file?.path %>';
         var socketUrl='<%= @socketUrl %>';
     </script>
     <script src="/js/spreadsheet.js"></script>
 <% end %>
-
-<div class="sheet-container" ng-app="spreadsheet" ng-controller="SheetController as ctrl">
-    <input type="text" ng-model="ctrl.data.sheet[ctrl.selection.iy][ctrl.selection.ix].value"/>
+<input type="text">
+<div class="sheet-container">
     
-    <table ng-mousemove="ctrl.data.mouse.select=(ctrl.data.mouse.press||false)" 
-            ng-mouseup="ctrl.data.mouse.press=false">
-        <thead>
-            <tr>
-                <th ng-repeat="col in ctrl.data.sheet[0] track by $index">
-                    <div class="left-grabber"></div>
-                    {{($index+1)|character}}
-                    <div class="right-grabber"></div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="row in ctrl.data.sheet track by $index">
-                <td id="cell-{{ (cell.col|character)+(cell.row+1) }}"
-                    ng-repeat="cell in row track by $index" ng-mouseenter="ctrl.cellMouseEnter(cell)"
-                    ng-mousedown="ctrl.data.mouse.press=true; ctrl.cellClick($event,cell)" 
-                    ng-class="{'selection':cell.selected}"><!---->
-                    <first-cell ng-if="cell.col==0 && cell.row==0" ></first-cell>
-                    {{cell.value}}
-                </td>
-            </tr>                
-        </tbody>
-    </table>
 </div>

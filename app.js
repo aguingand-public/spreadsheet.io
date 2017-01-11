@@ -78,6 +78,11 @@ app.listen(23000,function () {
 
 //////// SOCKETS
 
+
+/*
+ tableau  associatif NAMESPACE -> FILEID
+*/
+
 io.on('connection', function(socket) {
   console.log('nouvelle connection');
 

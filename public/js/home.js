@@ -1,6 +1,6 @@
 $(function() {
     if(location.pathname=='/') {
-        if(location.hash=='')
+        if(location.hash=='' || location.hash=='#')
             $('ul.navigation li').first().addClass('active');
         else
             $("a[href='/"+location.hash+"']").parent('li').addClass('active');
