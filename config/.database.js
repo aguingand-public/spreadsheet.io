@@ -1,8 +1,8 @@
 module.exports = {
     'connection': {
-        'host': '127.0.0.1',
-        'user': 'root',
-        'password': '',
+        'host': '130.79.158.79',
+        'user': 'dweb3',
+        'password': 'rthR9k7JR58RvuRY',
         'database': 'dweb3'
     },
     'users_table': 'users'
