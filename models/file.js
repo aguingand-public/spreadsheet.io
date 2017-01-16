@@ -12,7 +12,6 @@ exports.getAll = function(userName,done) {
     db.query('SELECT * FROM files WHERE creator=?',[userName], function(err,rows) {
         if(err)
             console.log(err);
-        console.log('FILE.GETALL : ');
         done(rows);
     });
 }

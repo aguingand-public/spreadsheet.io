@@ -1,20 +1,25 @@
-module.export = function(data, sheet){
-    var self;
-    
-    self.UpdateType ={
-        NO_CHANGE:1,
-        CELL_CHANGE:2,
-        ADD_ROW:3,
-        ADD_COL:4,
-        REMOVE_ROW:5,
-        REMOVE_COL:6
-    };
+var UpdateType = {
+    NO_CHANGE:1,
+    CELL_CHANGE:2,
+    ADD_ROW:3,
+    ADD_COL:4,
+    REMOVE_ROW:5,
+    REMOVE_COL:6
+};
+var UpdateOperation = function(data){
+    var self = {};
+    var sheet = data.sheet;
 
-    self.processAddCol = function(data, update) {
-        var sheet=data.sheet;
+    self.processAddCol = function(upd) {
     }
-    self.processCellChange = function(data, update) { 
-        var sheet=data.sheet;
+    /*
+    Update object (upd):
+        cell {
+            x, //col 
+            y // row
+        }
+    */
+    self.processCellChange = function(upd) { 
         if(upd.cell.x>sheet.length) {
             var int=upd.cell.x-(sheet.length-1);
             for(var j=0;j<int;j++)
@@ -28,5 +33,11 @@ module.export = function(data, sheet){
         }
         sheet[upd.cell.x][upd.cell.y] = upd.cell;
     }
+
+    self.getSheet = function() {
+        return sheet;
+    } 
     return self;
 };
+
+module.exports = {UpdateType:UpdateType, UpdateOperation:UpdateOperation}

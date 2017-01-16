@@ -29,7 +29,6 @@ var flash    = require('connect-flash');
 
 /// Configuration Socket.io
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
 
 /// Configuration Moteur de rendu ECT.js
 var ECT = require('ect');
@@ -72,26 +71,37 @@ require('./routes')(app, passport);
 
 /////// lancement de l'App
 
-app.listen(23000,function () {
+server.listen(23000,function () {
   console.log('Example app listening on port 23000 !');
 });
 
+
+var associateFileId = [];
+
 //////// SOCKETS
-
-
-/*
- tableau  associatif NAMESPACE -> FILEID
-*/
-
+var io = require('socket.io')(server);
+var cloud = require('./app/cloud');
+var update = require('./app/update'); 
 io.on('connection', function(socket) {
-  console.log('nouvelle connection');
-
-  console.log("existing namespaces");
-  for(var i=0;i<nspstack.length;i++) {
-    console.log(nspstack[i]);
-  }
-  nspstack.push(io.of('/'+tmpfileid));
-  tmpfileid++;
-
-  socket.emit('namespace_infos',{});
+  process.stdout.write('{SOCKET.IO} Nouvelle connexion ');
+  socket.on('Client Infos', function(data) {
+    var fid = data.file.id;
+    console.log('FileId = '+fid);
+    socket.join(fid.toString());
+    associateFileId[socket.id] = fid;
+  });
+  socket.on('cell change', function(changes) {
+    cloud.save(
+      associateFileId[socket.id],
+      changes.map(function(change) {
+        return {
+          cell: {
+            x: change[1],
+            y: change[0],
+            data: change[3]
+          },
+          type: update.UpdateType.CELL_CHANGE
+        }
+    }));
+  });
 });

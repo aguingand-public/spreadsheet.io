@@ -6,14 +6,19 @@ router.get('/edit', function(req, res) {
 });
 
 router.get('/edit*',util.isLoggedIn, function(req, res, next) {
-    res.locals.socketUrl = req.get('host');
+    res.locals.clientDatas = {
+        socketUrl : req.protocol + '://' + req.get('host')
+    };
     next();
 });
 
 router.get('/edit/:fileId',function(req, res) {
-    res.locals.file = {
-        path: 'cloud/user_' + req.user.id + '/' + req.params.fileId
-    };
+    res.locals.clientDatas = util.extend(res.locals.clientDatas, {
+        file : {
+            path: 'cloud/user_' + req.user.id + '/' + req.params.fileId,
+            id: req.params.fileId
+        }
+    })
     res.render('editor', {title:'Editeur'});
 });
 

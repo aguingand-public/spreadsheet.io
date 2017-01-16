@@ -8,8 +8,7 @@
     <script src="/assets/js/jquery-3.1.1.min.js"></script>
     
     <script>
-        var filepath='<%= @file?.path %>';
-        var socketUrl='<%= @socketUrl %>';
+        var client = <%- JSON.stringify(@clientDatas) %>;
     </script>
     <script src="/js/spreadsheet.js"></script>
 <% end %>
