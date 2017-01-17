@@ -20,18 +20,18 @@ var UpdateOperation = function(data){
         }
     */
     self.processCellChange = function(upd) { 
-        if(upd.cell.x>sheet.length) {
-            var int=upd.cell.x-(sheet.length-1);
+        if(upd.cell.row > sheet.length) {
+            var int=upd.cell.row-(sheet.length-1);
             for(var j=0;j<int;j++)
                 sheet.push([]);
         }
-        if(upd.cell.y>sheet[upd.cell.x].length)
+        if(upd.cell.col > sheet[upd.cell.row].length)
         {
-            var int=upd.cell.x-(sheet.length[upd.cell.x]-1);
+            var int=upd.cell.x-(sheet.length[upd.cell.row]-1);
             for(var j=0;j<int;j++)
-                sheet[upd.cell.x].push([]);
+                sheet[upd.cell.row].push([]);
         }
-        sheet[upd.cell.x][upd.cell.y] = upd.cell;
+        sheet[upd.cell.row][upd.cell.col] = upd.cell;
     }
 
     self.getSheet = function() {

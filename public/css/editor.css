@@ -1,0 +1,7 @@
+.editor-bar {
+    width:100%;
+}
+
+.selectedCellOut {
+    outline : solid 2px #5292F7 !important;
+}

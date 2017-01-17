@@ -63,6 +63,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
 app.use(express.static('public'));
+app.use('/cloud',express.static('cloud'));
 
 //////////// ROUTE ///////////////////
 
@@ -91,13 +92,14 @@ io.on('connection', function(socket) {
     associateFileId[socket.id] = fid;
   });
   socket.on('cell change', function(changes) {
+    console.log(associateFileId[socket.id]);
     cloud.save(
       associateFileId[socket.id],
       changes.map(function(change) {
         return {
           cell: {
-            x: change[1],
-            y: change[0],
+            row: change[0],
+            col: change[1],
             data: change[3]
           },
           type: update.UpdateType.CELL_CHANGE

@@ -2,17 +2,23 @@
 
 <% content 'imports' %>
     <link rel="stylesheet" href="/bower_components/handsontable/dist/handsontable.min.css">
-    <script src="/bower_components/handsontable/dist/handsontable.full.min.js"></script>
-    
+    <link rel="stylesheet" href="/css/editor.css">
+
     <script src="/assets/js/socket.io-1.4.5.js"></script>
     <script src="/assets/js/jquery-3.1.1.min.js"></script>
-    
+
+    <script src="/bower_components/handsontable/dist/handsontable.full.min.js"></script>
+
     <script>
         var client = <%- JSON.stringify(@clientDatas) %>;
     </script>
     <script src="/js/spreadsheet.js"></script>
 <% end %>
-<input type="text">
+<form class="rename">
+    <input type="text" name="filename" value="<%= @clientDatas.file.name %>"/>
+    <input type="submit" value="Changer de nom"/>
+</form>
+<input type="text" class="editor-bar">
 <div class="sheet-container">
     
 </div>

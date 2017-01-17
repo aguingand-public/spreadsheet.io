@@ -6,16 +6,21 @@ var update = require('./update');
 var UpdateType = update.UpdateType;
 
 
-module.exports = {
+var cloud = {
     getPath : function(fileId) {
         return 'cloud/'+fileId+'.json';
+    },
+    getPathWeb : function(fileId) {
+        return '/'+cloud.getPath(fileId);
     },
     save : function(fileId, updateStack) {
         // chemin du fichier
         var filepath = this.getPath(fileId);
         
         fs.readFile(filepath,function(err, data) {
-            filedata=JSON.parse(data);
+            if(err)
+                console.log(err);
+            var filedata=JSON.parse(data);
             var updOps = update.UpdateOperation(filedata);
 
             for(var i=0;i<updateStack.length;i++) {
@@ -54,4 +59,6 @@ module.exports = {
                 console.log('"'+filepath+'" created!');
         });
     }
-}
+};
+
+module.exports = cloud;
