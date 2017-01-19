@@ -2,6 +2,69 @@
     width:100%;
 }
 
-.selectedCellOut {
-    outline : solid 2px #5292F7 !important;
+
+.highlighted-1 {
+    outline: solid 2px #f44336 !important; 
 }
+
+.highlighted-2 {
+    outline: solid 2px #009688 !important; 
+}
+
+.highlighted-3 {
+    outline: solid 2px #cddc39 !important; 
+}
+
+.highlighted-4 {
+    outline: solid 2px #E91E63 !important; 
+}
+
+.highlighted-5 {
+    outline: solid 2px #3f51b5 !important; 
+}
+
+.highlighted-6 {
+    outline: solid 2px #4caf50 !important; 
+}
+
+.highlighted-7 {
+    outline: solid 2px #9c27b0 !important; 
+}
+
+.highlighted-8 {
+    outline: solid 2px #00bcd4 !important; 
+}
+
+.highlighted-9 {
+    outline: solid 2px #ff9800 !important; 
+}
+
+.highlighted-10 {
+    outline: solid 2px #673ab7 !important; 
+}
+
+.highlighted-11 {
+    outline: solid 2px #795548 !important; 
+}
+
+.highlighted-12 {
+    outline: solid 2px #607d8b !important; 
+}
+
+
+
+
+
+
+
+
+
+
+
+.highlighted-4 {
+    outline: solid 2px #ffc107 !important; 
+}
+
+
+
+
