@@ -15,11 +15,11 @@ var UpdateOperation = function(data){
     /*
     Update object (upd):
         cell {
-            x, //col 
+            x, //col
             y // row
         }
     */
-    self.processCellChange = function(upd) { 
+    self.processCellChange = function(upd) {
         if(upd.cell.row > sheet.length) {
             var int=upd.cell.row-(sheet.length-1);
             for(var j=0;j<int;j++)
@@ -36,7 +36,7 @@ var UpdateOperation = function(data){
 
     self.getSheet = function() {
         return sheet;
-    } 
+    }
     return self;
 };
 

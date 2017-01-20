@@ -1,6 +1,139 @@
-.editor-bar {
-    width:100%;
+body{
+  overflow: hidden;
 }
+
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app-container {
+  display: flex;
+  overflow: hidden;
+}
+
+.app-actions-column {
+  width: 6.5rem;
+  background-color: #428a6f;
+}
+
+.app-logo {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.app-main-section {
+  width: 100%;
+  height: 100vh;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.app-headbar {
+
+}
+
+.app-headbar__main-section {
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.app-headbar__context-menu{
+  position: relative;
+  display: inl
+}
+
+.main-section-menu__item{
+  display: table-cell;
+}
+
+.main-section-menu__item:not(:last-child) a{
+  border-right: 0;
+}
+
+.main-section-menu__item > a {
+  border: 1px solid #CCC;
+  color: #777;
+  display: block;
+  background-color: #FFF;
+  padding: 0.4rem 0.6rem;
+  text-decoration: none;
+}
+
+.main-section-menu__item a:hover {
+  background: #F2F2F2;
+}
+
+.main-section-sub-menu {
+  position: absolute;
+  top: 2.9rem;
+  display: none;
+  z-index: 999;
+  border: 1px solid #CCC;
+  background-color: #FFF;
+  text-decoration: none;
+  box-shadow: 0px 2px 2px #AAA;
+  min-width: 15rem;
+}
+
+.main-section-sub-menu__item a {
+  color: #777;
+  display: block;
+  padding: 0.4rem 0.6rem;
+  text-decoration: none;
+}
+
+.main-section-menu__item > a.js-cursor-active + .main-section-sub-menu{
+  display: block;
+}
+
+
+
+.app-headbar__main-section {
+  height: 5.3rem;
+}
+
+.app-headbar__main-section-rename-file input[name=filename] {
+  border: 0;
+  font-size: 2rem;
+  color: #428a6f;
+  cursor: pointer;
+}
+
+.app-headbar__main-section-rename-file input[name=filename]:hover{
+  color: #464646;
+}
+
+.app-headbar__main-section-rename-file input[name=filename]:focus {
+  color: #000;
+  cursor: text;
+}
+
+.app-headbar__main-section-rename-file input[type=submit] {
+  visibility: hidden;
+}
+
+.app-headbar__editor-bar {
+  width:100%;
+  margin-top: 1rem;
+}
+
+.editor-bar {
+  width: 100%;
+}
+
+.app-table-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: block;
+  margin-top: 1rem;
+}
+
 
 .selectedCellOut {
     outline : solid 2px #5292F7 !important;
