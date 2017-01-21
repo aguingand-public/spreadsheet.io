@@ -64,8 +64,12 @@ ul{
   text-decoration: none;
 }
 
-.main-section-menu__item a:hover {
+.main-section-menu__item > a:hover {
   background: #F2F2F2;
+}
+
+.main-section-menu__item > a.js-cursor-active + .main-section-sub-menu{
+  display: block;
 }
 
 .main-section-sub-menu {
@@ -80,18 +84,21 @@ ul{
   min-width: 15rem;
 }
 
+.main-section-sub-menu__item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-section-sub-menu__item:hover {
+  background: #F2F2F2;
+}
+
 .main-section-sub-menu__item a {
   color: #777;
   display: block;
   padding: 0.4rem 0.6rem;
   text-decoration: none;
 }
-
-.main-section-menu__item > a.js-cursor-active + .main-section-sub-menu{
-  display: block;
-}
-
-
 
 .app-headbar__main-section {
   height: 5.3rem;

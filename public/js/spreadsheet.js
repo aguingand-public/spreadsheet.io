@@ -87,6 +87,7 @@ $(function() {
       });
     }
   });
+  
 
   $('.js-app-headbar__context-menu').on('click', '.js-menu-action', function() {
     console.log($(this));
