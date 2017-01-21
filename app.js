@@ -52,11 +52,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use(session({
+var sessionMiddleware = session({
 	secret: 'vidyapathaisalwaysrunning',
-	resave: true,
-	saveUninitialized: true
- } )); 
+  key: 'express.sid',
+  resave: true,
+  saveUninitialized: true
+ })
+
+app.use(sessionMiddleware); 
+
+
 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -77,33 +82,113 @@ server.listen(23000,function () {
 });
 
 
-var associateFileId = [];
+var sharedsession = require("express-socket.io-session");
+
+var associateDatas = [];
 
 //////// SOCKETS
-var io = require('socket.io')(server);
+
 var cloud = require('./app/cloud');
-var update = require('./app/update'); 
+var update = require('./app/update');
+var util = require('./app/util');
+
+var inspect = require('util').inspect;
+
+var io = require('socket.io')(server);
+
+/*io.use(sharedsession(session, {
+    autoSave:true
+}));*/
+
+
+var socketList = {};
+
+function getRoomUsers(roomID) {
+  var fileUsers = [];
+   Object.keys(socketList).forEach(function(socketId) {
+    var socket = socketList[socketId];
+    if(socket.room === roomID) {
+      fileUsers.push({
+        user : socket.user
+      })
+    }
+  });
+  return fileUsers;
+}
+
 io.on('connection', function(socket) {
-  process.stdout.write('{SOCKET.IO} Nouvelle connexion ');
+  console.log('{SOCKET.IO} Nouvelle connexion');
+  
+  
   socket.on('Client Infos', function(data) {
     var fid = data.file.id;
-    console.log('FileId = '+fid);
-    socket.join(fid.toString());
-    associateFileId[socket.id] = fid;
+    console.log('Client Infos',data);
+    socket.join(fid);
+
+    var newSocket = {
+      room : fid,
+      user : {
+        username : data.user.username
+      }
+    };
+    Object.keys(socketList).forEach(function(socketId) {
+      var socket = socketList[socketId];
+      if(socket.room === newSocket.room &&
+         socket.user.username == newSocket.user.username
+         ) {
+          delete socketList[socketId];
+      }
+    });
+    socketList[socket.id] = newSocket;
+    console.log('socketList = ',socketList);
+
+    var fileUsers = getRoomUsers(fid);
+    console.log('ROOM '+fid+' | fileUsers = ',fileUsers);
+    
+    socket.emit('collaborators',fileUsers);
+    socket.to(fid).emit('collaborators',fileUsers);
   });
+
+  socket.on('disconnect', function() {
+      console.log('Got disconnect!');
+      if(typeof socketList[socket.id] == "undefined")
+        return;
+
+      var fid = socketList[socket.id].room;
+      
+      delete socketList[socket.id];
+      var fileUsers = getRoomUsers(fid);
+      socket.to(fid).emit('collaborators', fileUsers);
+   });
   socket.on('cell change', function(changes) {
-    console.log(associateFileId[socket.id]);
+    console.log("cell change in ", socketList[socket.id].room);
+    console.log("changes : ",changes);
+    var cell =  {
+      row: changes[0],
+      col: changes[1],
+      data: changes[3]
+    };
+    socket.broadcast
+    .to(socketList[socket.id].room)
+    .emit('external cell change', {
+      user : socketList[socket.id].user,
+      cell: cell
+    });
     cloud.save(
-      associateFileId[socket.id],
+      socketList[socket.id].room,
       changes.map(function(change) {
         return {
-          cell: {
-            row: change[0],
-            col: change[1],
-            data: change[3]
-          },
+          cell: cell,
           type: update.UpdateType.CELL_CHANGE
         }
     }));
+  });
+  socket.on('new selection', function(coords) {
+    socket.broadcast
+    .to(socketList[socket.id].room)
+    .emit('external selection', {
+      user:socketList[socket.id].user, 
+      selection:coords
+    });
   });
 });

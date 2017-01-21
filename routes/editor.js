@@ -21,6 +21,9 @@ router.get('/edit/:fileId', function(req, res) {
                 path: cloud.getPathWeb(req.params.fileId),
                 id: req.params.fileId,
                 name: file.name
+            },
+            user : {
+                username : req.user.username
             }
         })
         res.render('editor', {title:'Editeur'});

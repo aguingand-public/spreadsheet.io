@@ -4,7 +4,7 @@ var router=require('express').Router();
 var cloud=require('../app/cloud');
 
 router.post('/file', function(req,res) {
-    file.create({name:"Sheets sans nom", creator:req.user.username}, function(id) {
+    file.create({name:"Sheet sans nom", creator:req.user.username}, function(id) {
         cloud.createFile(id,req.user.username);
         res.redirect('edit/'+id);
     });
