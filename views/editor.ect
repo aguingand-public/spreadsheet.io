@@ -101,7 +101,9 @@
 
         <div class="app-headbar__collaborators" style="width:18rem">
 
-          <!-- TODO:  -->
+          <ul id="clientList">
+
+          </ul>
 
         </div>
 
@@ -112,7 +114,7 @@
           <ul class="main-section-sub-menu">
             <li class="main-section-sub-menu__item">
               <a href="#">Test</a>
-              
+
             </li>
             <li class="main-section-sub-menu__item">
               <a href="#">Sous-menu super mega long de ouf qui pourrait bien agrandir le bloc</a>
@@ -152,3 +154,12 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<form class="rename">
+    <input type="text" name="filename" value="<%= @clientDatas.file.name %>"/>
+    <input type="submit" value="Changer de nom"/>
+</form>
+<input type="text" class="editor-bar">
+<div class="sheet-container">
+
+</div>
