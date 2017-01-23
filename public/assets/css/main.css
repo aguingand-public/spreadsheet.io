@@ -84,6 +84,16 @@ body {
 .ss-logo {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 22rem;
+}
+
+.ss-logo__text {
+	font-weight: bold;
+}
+
+.ss-logo__text--green {
+	color: #408A6F;
 }
 
 .ss-logo__img{
