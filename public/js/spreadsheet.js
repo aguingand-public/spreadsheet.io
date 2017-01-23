@@ -30,7 +30,7 @@ socket.on('collaborators', function(datas) {
   console.log('collaborator = ',collaborators);
 
   executeIfDefined(jobs.afterCollaborators);
-  
+
   var $clientList = $('#clientList');
   $clientList.empty();
   $.each(collaborators,function(username, collaborator) {
@@ -53,7 +53,7 @@ socket.on('external selection', function(data) {
   console.log(collaborators);
   jobs.afterCollaborators = function() {
     collaborators[data.user.username].selectedCell = data.selection;
-    hot.render(); 
+    hot.render();
   }
   if(typeof collaborators[data.user.username] != "undefined")
     jobs.afterCollaborators();
@@ -67,7 +67,7 @@ socket.on('external cell change', function(data) {
 
 // dom + Handsontable
 $(function() {
-  var $container = $('.sheet-container');
+  var $container = $('.js-sheet-container');
   var selected = {};
 
   var data = new Array(100);
@@ -112,10 +112,10 @@ $(function() {
         }
       })
     }
-  })
-  
+  });
+
   $.getJSON(client.file.path, function(filedata) {
-    
+
     var sheet = filedata.sheet;
     console.log(sheet);
     for(var row=0;row<sheet.length;row++) {
@@ -131,17 +131,8 @@ $(function() {
     hot.selectCell(0,0);
   });
 
-  /// Actions
-  $('#action-undo').click(function() {
-    hot.undo();
-  });
-  $('#action-redo').click(function() {
-    hot.redo();
-  });
-  ///
 
-
-  $('input.editor-bar').on("change paste keyup",function() {
+  $('input.js-editor-bar').on("change paste keyup",function() {
     var val = $(this).val();
     if(val.length>0 && val[0] == '=') {
       hot.setDataAtCell(selected.row, selected.col, val, "formula");
@@ -151,7 +142,7 @@ $(function() {
     }
   });
 
-  $('input.editor-bar').keypress(function(e) {
+  $('input.js-editor-bar').keypress(function(e) {
     var val = $(this).val();
     if(e.which == 13) {
       if(val.length>0 && val[0] == '=') {
@@ -165,19 +156,81 @@ $(function() {
         //var newVal = Parser.evaluate(expr)
       }
     }
-  })
+  });
 
-  $('input.editor-bar').click(function() {
+  $('input.js-editor-bar').click(function() {
     $(this).focus();
-  })
+  });
 
-  $('form.rename').submit(function(e) {
-    e.preventDefault();
-    $.post('/file/'+client.file.id+'/rename',{filename:$("input[name='filename']").val()});
-    $(this).blur();
-  });  
+  $('form.js-file-rename').submit(function(e) {
+  $nameInput = $(this).find('input[name=filename]');
+  e.preventDefault();
+  $.post('/file/'+client.file.id+'/rename',{filename:$("input[name='filename']").val()}, function() {
+      $nameInput[0].blur();
+  });
+});
+
+$(document).click(function(e) {
+    var test = Interface.getActiveElement();
+    if($(e.target).is(Interface.getActiveElement())) {
+      Interface.unsetActive();
+    } else if (!$(e.target).is(Interface.getActiveElement())) {
+      Interface.unsetActive(function() {
+        if($(e.target).hasClass('activable')){
+          Interface.setActive($(e.target));
+        }
+      });
+    }
+  });
+
+
+  $('.js-app-headbar__context-menu').on('click', '.js-menu-action', function() {
+    console.log($(this));
+    var action = $(this).data('action');
+    Actions[action]();
+  });
+
+  var Actions = (function() {
+    var self = {};
+
+    self.undo = function() {
+      console.log('undo');
+      hot.undo();
+    }
+
+    self.redo = function() {
+      hot.redo();
+    }
+
+    return self;
+  }());
+
+
+  var Interface = (function() {
+    var self = {};
+    var activeElement;
+
+    self.setActive = function(element) {
+      activeElement = element;
+      element.addClass('js-cursor-active');
+    }
+
+    self.getActiveElement = function() {
+      return activeElement;
+    }
+
+    self.unsetActive = function(callback = function(){}) {
+      if(activeElement !== undefined){
+        activeElement.removeClass('js-cursor-active');
+        activeElement = undefined;
+      }
+      callback();
+    }
+
+    return self;
+  }());
+
 })
-
 
 
 /// Utils
