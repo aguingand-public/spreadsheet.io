@@ -1,0 +1,142 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+html {
+  font-size: .625em; /* fallback IE8+ */
+  font-size: calc(1em * .625); /* IE9-IE11 math fixing. See http://bit.ly/1g4X0bX */
+	font-family: 'Open Sans', 'Arial', sans-serif;
+}
+body {
+  font-size: 1.4em; /* base font-size is equivalent "14px" */
+}
+.ss-container{
+	width: 1200px;
+	display: block;
+	margin: 0 auto;
+}
+
+.ss-mainHeader{
+	padding: 1rem 0;
+	box-shadow: 0 2px 6px rgba(0,0,0, 0.6);
+	position: relative;
+}
+
+.ss-mainHeader__container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ss-mainHeader__logo{
+	font-size: 2.2rem;
+}
+
+.ss-logo {
+	display: flex;
+	align-items: center;
+}
+
+.ss-logo__img{
+	width: 4.5rem;
+}
+
+.ss-headingSection {
+	padding: 4rem 0;
+	background-color: #68C19D;
+}
+
+.ss-headingSection__description {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.ss-headingSection__description-title {
+	font-size: 3.6rem;
+	font-weight: bold;
+	padding-bottom: 3rem;
+}
+
+.ss-headingSection__description-text {
+	font-size: 1.4rem;
+	line-height: 2rem;
+}
+
+.ss-characteristics {
+	padding: 4rem 0;
+}
+
+.ss-card__img-container img{
+	width: 100%;
+	display: block;
+	height: 23rem;
+}
+
+.ss-card__content {
+	padding: 2rem;
+}
+
+.ss-card__title {
+
+}
+
+/*		SOCIAL SHARE ICONS		 */
+.ss-social-share {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.ss-social-share__link {
+	padding: 2rem;
+}
