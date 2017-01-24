@@ -77,6 +77,15 @@ body {
 	align-items: center;
 }
 
+.ss-mainHeader__logo-link{
+	color: inherit;
+}
+
+.ss-mainHeader__logo-link:hover{
+	text-decoration: none;
+	color: inherit;
+}
+
 .ss-mainHeader__logo{
 	font-size: 2.2rem;
 }
@@ -98,6 +107,47 @@ body {
 
 .ss-logo__img{
 	width: 4.5rem;
+}
+
+.ss-mainHeader__btns {
+	width: 24rem;
+	justify-content: space-between;
+	display: flex;
+}
+
+.ss-btn {
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+	color: #FFF;
+	display: block;
+	padding: 1rem;
+	background-color: #337ab7;
+	border-radius: 0.6rem;
+}
+
+.ss-btn:hover {
+	color: #FFF;
+	text-decoration: inherit;
+	background-color: #4991d0;
+}
+
+.ss-btn--primary {
+	background-color: #C43323;
+}
+
+.ss-btn--primary:hover {
+	background-color: #de4b3a;
+}
+
+.ss-btn--light {
+	background-color: transparent;
+	color: #848484;
+}
+
+.ss-btn--light:hover {
+	 background-color: inherit;
+	 color: #a0a0a0;
 }
 
 .ss-headingSection {
