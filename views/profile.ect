@@ -1,27 +1,31 @@
 <% extend 'layout/home' %>
 
-<div class="row">
-    <!-- LOCAL INFORMATION -->
-    <div class="col-sm-6">
-        <div class="well">
-            <h3><span class="fa fa-user"></span> Local</h3>
-                <p>
-                    <strong>id</strong>: <%= @user?.id %><br>
-                    <strong>username</strong>: <%= @user?.username %><br>
-                    <strong>password</strong>: <%= @user?.password %>
-                </p>
+<main class="ss-mainContent">
+  <div class="ss-container">
+    <div class="row">
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+                    <p>
+                        <strong>id</strong>: <%= @user?.id %><br>
+                        <strong>username</strong>: <%= @user?.username %><br>
+                        <strong>password</strong>: <%= @user?.password %>
+                    </p>
+            </div>
         </div>
     </div>
-</div>
-<form method="post" action="/file">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Créer une nouvelle Sheet</button>
-</form>
-<div class="row">
-    <!-- LOCAL INFORMATION -->
-    <div class="col-sm-6">
-        <% for file in @files : %>
-            <li><a href="edit/<%- file.id %>"><%= file.name %></a></li>
-        <% end %>
+    <form method="post" action="/file">
+        <button class="ss-btn" type="submit">Créer une nouvelle Sheet</button>
+    </form>
+    <div class="row">
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <% for file in @files : %>
+                <li><a href="edit/<%- file.id %>"><%= file.name %></a></li>
+            <% end %>
+        </div>
     </div>
-</div>
+  </div>
 
+</main>

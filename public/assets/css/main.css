@@ -59,6 +59,14 @@ html {
 body {
   font-size: 1.4em; /* base font-size is equivalent "14px" */
 }
+
+a, a:hover, a:active, a:focus {
+	text-decoration: none;
+	color: inherit;
+}
+
+
+
 .ss-container{
 	width: 1200px;
 	display: block;
@@ -78,6 +86,7 @@ body {
 }
 
 .ss-mainHeader__logo-link{
+	text-decoration: none;
 	color: inherit;
 }
 
@@ -109,6 +118,11 @@ body {
 	width: 4.5rem;
 }
 
+.ss-mainHeader__profile {
+	width: 100%;
+	text-align: right;
+}
+
 .ss-mainHeader__btns {
 	width: 24rem;
 	justify-content: space-between;
@@ -116,14 +130,17 @@ body {
 }
 
 .ss-btn {
+	/*reset*/
+	text-decoration: none;
+	border: 0;
+	/* style */
 	text-transform: uppercase;
 	font-weight: bold;
-	text-decoration: none;
 	color: #FFF;
-	display: block;
 	padding: 1rem;
-	background-color: #337ab7;
+	background-color: #428a6f;
 	border-radius: 0.6rem;
+	display: block;
 }
 
 .ss-btn:hover {
@@ -150,9 +167,15 @@ body {
 	 color: #a0a0a0;
 }
 
+.ss-btn--round {
+	border-radius: 50%;
+	padding: 0;
+}
+
 .ss-headingSection {
 	padding: 4rem 0;
 	background-color: #68C19D;
+	color: #FFF;
 }
 
 .ss-headingSection__description {
@@ -164,16 +187,20 @@ body {
 .ss-headingSection__description-title {
 	font-size: 3.6rem;
 	font-weight: bold;
-	padding-bottom: 3rem;
 }
 
 .ss-headingSection__description-text {
 	font-size: 1.4rem;
 	line-height: 2rem;
+	margin: 3rem 0 6rem;
+}
+
+.ss-mainContent {
+	padding: 4rem 0;
 }
 
 .ss-characteristics {
-	padding: 4rem 0;
+
 }
 
 .ss-card__img-container img{
@@ -190,6 +217,61 @@ body {
 
 }
 
+.ss-dropdownContainer {
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.ss-dropdown__btnMain, .ss-dropdown__btnArrow {
+	padding: 0.5rem;
+	border-radius: 0.6rem;
+}
+
+.ss-dropdown__btnMain {
+	font-size: 1.5rem;
+}
+
+.ss-dropdown__btnArrow {
+	font-family: 'FontAwesome';
+	font-size: 2rem;
+}
+
+.ss-dropdown__btnArrow::after {
+	content: '\f107';
+}
+
+.ss-dropdown__btnArrow:hover, .ss-dropdown__btnMain:hover {
+	background-color: #eee;
+}
+
+.ss-dropdownMenu {
+	position: absolute;
+  top: 3rem;
+	right: 0;
+  display: none;
+  z-index: 999;
+  border: 1px solid #CCC;
+  background-color: #FFF;
+  text-decoration: none;
+  box-shadow: 0px 2px 2px #AAA;
+  min-width: 15rem;
+}
+
+.ss-dropdownMenu__item {
+	padding: 1rem;
+}
+
+.ss-dropdownMenu__item:hover {
+	background: #F2F2F2;
+}
+
+.ss-dropdown__btnArrow.ss-dropdown--active + .ss-dropdownMenu {
+	display: block;
+	position: absolute;
+}
+
 /*		SOCIAL SHARE ICONS		 */
 .ss-social-share {
 	display: flex;
@@ -198,5 +280,13 @@ body {
 }
 
 .ss-social-share__link {
-	padding: 2rem;
+	margin: 2rem;
+	width: 3rem;
+	height: 3rem;
+	line-height: 3rem;
+	text-align: center;
+}
+
+.ss-social-share__link:hover {
+	color: inherit;
 }

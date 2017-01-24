@@ -12,4 +12,8 @@ $(function() {
             $this.addClass('active');
         }
     });
+
+    $('.js-ss-dropdown').click(function() {
+      $(this).toggleClass('ss-dropdown--active');
+    });
 });
